@@ -1,0 +1,11 @@
+<section class='products'>
+    <div class='products_search-add_section'>
+        <div class='products_search'>
+            <input (keyup)="setSearchValue($event)" placeholder='Buscar...' type='text' />
+        </div>
+        <div class='products_add'>
+            <button type='button' (click)="goToCreate()">Agregar</button>
+        </div>
+    </div>
+    <app-table [text_value]='text_value'></app-table>
+</section>

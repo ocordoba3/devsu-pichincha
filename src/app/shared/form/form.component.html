@@ -1,0 +1,75 @@
+<section class='form_container'>
+    <div class='form_title'>
+        <h1>{{title}}</h1>
+    </div>
+    <p class="form_required-fields">(*) Campos requeridos</p>
+    <form class='form' [formGroup]="form" (ngSubmit)="save()">
+        <div class='form_field'>
+            <label [ngClass]="{'disabled': editMode}" for="id">ID *</label>
+            <input [ngClass]="{'disabled': editMode}" type='text' id="id" formControlName="id" minlength="3"
+                maxlength="10" (blur)="handleIdValidation($event)" />
+            <div class="alert_error" *ngIf="form.controls['id'].errors?.['required'] && form.controls['id'].touched">
+                Campo requerido
+            </div>
+            <div class="alert_error" *ngIf="form.controls['id'].errors?.['minlength'] && form.controls['id'].touched">
+                Mínimo 3 caracteres
+            </div>
+            <div class="alert_error" *ngIf="form.controls['id'].errors?.['id_exists'] && form.controls['id'].touched">
+                El ID ya existe
+            </div>
+        </div>
+        <div class='form_field'>
+            <label for="name">Nombre *</label>
+            <input type='text' id='name' formControlName='name' minlength="5" maxlength="100" />
+            <div class="alert_error"
+                *ngIf="form.controls['name'].errors?.['required'] && form.controls['name'].touched">
+                Campo requerido
+            </div>
+            <div class="alert_error"
+                *ngIf="form.controls['name'].errors?.['minlength'] && form.controls['name'].touched">
+                Mínimo 5 caracteres
+            </div>
+        </div>
+        <div class='form_field'>
+            <label for="description">Descripción *</label>
+            <input type='text' id="description" formControlName="description" minlength="10" maxlength="200" />
+            <div class="alert_error"
+                *ngIf="form.controls['description'].errors?.['required'] && form.controls['description'].touched">
+                Campo requerido
+            </div>
+            <div class="alert_error"
+                *ngIf="form.controls['description'].errors?.['minlength'] && form.controls['description'].touched">
+                Mínimo 10 caracteres
+            </div>
+        </div>
+        <div class='form_field'>
+            <label for="logo">Logo *</label>
+            <input type='text' id='logo' formControlName='logo' />
+            <div class="alert_error"
+                *ngIf="form.controls['logo'].errors?.['required'] && form.controls['logo'].touched">
+                Campo requerido
+            </div>
+        </div>
+        <div class='form_field'>
+            <label for="date_release">Fecha de liberación *</label>
+            <input type='date' id='date_release' formControlName='date_release' (change)="handleDateChange($event)"
+                [min]='min_date' />
+            <div class="alert_error"
+                *ngIf="form.controls['date_release'].errors?.['required'] && form.controls['date_release'].touched">
+                Campo requerido
+            </div>
+        </div>
+        <div class='form_field'>
+            <label class='disabled' for="date_revision">Fecha de revisión *</label>
+            <input class='disabled' type='date' id='date_revision' formControlName='date_revision' />
+        </div>
+        <div class='form_buttons' *ngIf="editMode">
+        </div>
+        <div class='form_buttons' *ngIf="!editMode">
+            <button class='form_buttons-restart' type='button' (click)="reset()">Reiniciar</button>
+        </div>
+        <div class='form_buttons'>
+            <button class='form_buttons-send' type='submit' [disabled]="!form.valid">Enviar</button>
+        </div>
+    </form>
+</section>

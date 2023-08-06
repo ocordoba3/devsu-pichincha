@@ -1,0 +1,94 @@
+.products_section
+    padding: 2rem
+    width: 100%
+    background-color: #FFFFFF
+    margin-top: 1rem
+
+    .products_table
+        width: 100%
+        border-bottom: 0.1rem solid #f2f2f2
+        margin-bottom: 2rem
+
+        .products_table-header th
+            font-size: 1.8rem
+            text-align: center
+            padding: 1rem 0
+
+        .products_table-body
+            .products_table-logo
+                height: 4rem
+
+        .products_table-body td
+            font-size: 1.6rem
+            text-align: center
+            border-top: 0.1rem solid #f2f2f2
+            padding: 1rem 0
+
+        .products_table-options
+            position: relative
+            display: inline-block
+
+        .products_table-options_content
+            display: none
+            position: absolute
+            background-color: #f2f2f2
+            min-width: 9rem
+            z-index: 1
+            border: 0.1rem solid
+            left: -3rem
+
+        .products_table-options_content a
+            font-size: 1.2rem
+            padding: 12px 16px
+            text-decoration: none
+            display: block
+            color: #000
+            cursor: pointer
+
+        .products_table-options_content a:hover
+            background-color: #FFDD00
+
+        .products_table-options_button
+            background-color: #ffffff
+            border: none
+            color: #ffffff
+
+        .products_table-options_button::after
+            content: "..."
+            transform: rotate(90deg)
+            font-weight: bold
+            font-size: 2rem
+            display: inline-block
+            cursor: pointer
+            color: #000
+
+        .products_table-options:hover .products_table-options_content
+            display: block
+
+    .products_table-pagination
+        width: 100%
+        display: flex
+        justify-content: space-between
+
+        .products_table-pagination_count
+            font-size: 1.4rem
+
+        .products_table-pagination_selection select,
+        .products_table-pagination_selection select option,
+        .products_table-pagination_buttons button
+            font-size: 1.4rem
+
+        .products_table-pagination_buttons button
+            margin: 0 1rem
+            background-color: #0E265A
+            color: #FFFFFF
+            border: none
+            padding: .5rem
+            cursor: pointer
+
+        .products_table-pagination_buttons button:disabled
+            opacity: .5
+            cursor: not-allowed
+
+        .products_table-pagination_selection select
+            padding: .5rem

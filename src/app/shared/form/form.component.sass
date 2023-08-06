@@ -1,0 +1,57 @@
+.form_container
+    margin: 5rem 12rem
+    background-color: #ffffff
+    box-sizing: border-box
+
+    .form_title
+        text-align: center
+        padding: 2rem
+        border-bottom: 0.2rem solid #c4c4c4
+
+    .form_required-fields
+        font-size: 1.6rem
+        padding: 2rem 5rem
+        font-weight: bold
+
+    .form
+        padding: 2rem 5rem
+        display: grid
+        gap: 2rem
+        grid-template-columns: repeat(2, 1fr)
+
+        .form_field
+            display: grid
+
+        .form_field label,
+        .form_field input
+            font-size: 1.4rem
+
+        .form_field .disabled
+            opacity: 0.6
+
+        .form_field input
+            padding: 1rem
+            border-radius: .2rem
+            border: 0.1rem solid #c4c4c4
+
+        .form_field label
+            margin-bottom: .8rem
+
+        .form_buttons
+            width: 100%
+
+            .form_buttons-restart,
+            .form_buttons-send
+                font-size: 1.4rem
+                cursor: pointer
+                border: none
+                padding: 2rem
+                font-weight: bold
+            .form_buttons-send
+                background-color: #FFDD00
+
+            .form_buttons-restart
+                background-color: #c4c4c4
+
+        .form_buttons:has(.form_buttons-restart)
+            text-align: end

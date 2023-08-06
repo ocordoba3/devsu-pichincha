@@ -1,0 +1,47 @@
+<div class='products_section'>
+    <table class='products_table'>
+        <tr class='products_table-header'>
+            <th>Logo</th>
+            <th>Nombre del producto</th>
+            <th>Descripción</th>
+            <th>Fecha de liberación</th>
+            <th>Fecha de reestructuración</th>
+            <th></th>
+        </tr>
+
+        <tr *ngFor="let item of filteredProducts" class='products_table-body'>
+            <td><img class="products_table-logo" [src]="item.logo || default_logo" [alt]="item.name"></td>
+            <td>{{item.name | titlecase}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.date_release | date:"dd/MM/yyyy"}}</td>
+            <td>{{item.date_revision | date:"dd/MM/yyyy"}}</td>
+            <td>
+                <div class='products_table-options'>
+                    <button type='button' class="products_table-options_button">.</button>
+                    <div class="products_table-options_content">
+                        <a routerLink="/edit/{{item.id}}">Editar</a>
+                        <a (click)='handleDelete(item?.id || "")'>Eliminar</a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <div class='products_table-pagination'>
+        <div class='products_table-pagination_count'>
+            {{products.length}} Resultados
+        </div>
+        <div class='products_table-pagination_buttons'>
+            <button (click)="handleChangePage(page - 1)" [disabled]="page === 1">Anterior</button>
+            <button (click)="handleChangePage(page + 1)"
+                [disabled]="page * productsPerPage >= products.length">Siguiente</button>
+        </div>
+        <div class='products_table-pagination_selection'>
+            <select title='items_per_view' (change)="handleViewQuantity($event)">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+        </div>
+    </div>
+
+</div>
