@@ -1,14 +1,16 @@
 <div class='products_section'>
     <table class='products_table'>
+        <!-- HEADERS -->
         <tr class='products_table-header'>
             <th>Logo</th>
-            <th>Nombre del producto</th>
+            <th>Producto</th>
             <th>Descripción</th>
-            <th>Fecha de liberación</th>
-            <th>Fecha de reestructuración</th>
+            <th>F. Liberación</th>
+            <th>F. Reestructuración</th>
             <th></th>
         </tr>
 
+        <!-- DISPLAY EVERY PRODUCT -->
         <tr *ngFor="let item of filteredProducts" class='products_table-body'>
             <td><img class="products_table-logo" [src]="item.logo || default_logo" [alt]="item.name"></td>
             <td>{{item.name | titlecase}}</td>
@@ -26,15 +28,19 @@
             </td>
         </tr>
     </table>
+    <!-- PAGINATION -->
     <div class='products_table-pagination'>
+        <!-- PRODUCTS COUNT -->
         <div class='products_table-pagination_count'>
-            {{products.length}} Resultados
+            {{filteredProducts.length}} de {{text_value ? searchedProducts.length : products.length}} Resultados
         </div>
+        <!-- PAGINATION BUTTONS -->
         <div class='products_table-pagination_buttons'>
             <button (click)="handleChangePage(page - 1)" [disabled]="page === 1">Anterior</button>
             <button (click)="handleChangePage(page + 1)"
-                [disabled]="page * productsPerPage >= products.length">Siguiente</button>
+                [disabled]="page * productsPerPage >= (text_value ? searchedProducts.length : products.length)">Siguiente</button>
         </div>
+        <!-- QUANTITY ITEMS PER VIEW -->
         <div class='products_table-pagination_selection'>
             <select title='items_per_view' (change)="handleViewQuantity($event)">
                 <option value="5">5</option>

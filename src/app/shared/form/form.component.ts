@@ -40,6 +40,7 @@ export class FormComponent implements OnInit {
     }
   }
 
+  // Calculates the date_revision value. One year in the future depending on date_release value
   handleDateChange(e: Event) {
     const formattedValue = (e.target as HTMLInputElement).value;
     const splittedValue = formattedValue.split("-");
@@ -47,6 +48,7 @@ export class FormComponent implements OnInit {
     this.form.setValue({ ...this.form.value, date_revision: oneYearValue });
   }
 
+  // Validates the ID. Should be unique.
   handleIdValidation(e: Event) {
     const id = (e.target as HTMLInputElement).value;
     this.productService.getProductById(id).subscribe((exists) => {
@@ -57,10 +59,9 @@ export class FormComponent implements OnInit {
     });
   }
 
-  reset() {
-    this.form.reset();
-  }
-
+  // Handle the Save. 
+  // When is on edition mode, call the editProduct service. 
+  // If not, call the createProduct service.
   save() {
     const handleResp = this.productService[this.editMode ? "editProduct" : "createProduct"](this.form.getRawValue()).pipe(
       map((resp) => {

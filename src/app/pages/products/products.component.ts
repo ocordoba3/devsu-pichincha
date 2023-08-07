@@ -6,25 +6,27 @@ import { Router } from '@angular/router';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.sass']
 })
-export class ProductsComponent implements OnInit{
+export class ProductsComponent implements OnInit {
 
   text_value: string = "";
+  loading: boolean = true;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
+  }
 
+  // Navigate to Create form
   goToCreate() {
     this.router.navigate(["/create"]);
   }
 
+  // Pass the Search value as Input
   setSearchValue(e: Event) {
     this.text_value = (e.target as HTMLInputElement).value;
   }
-    // create() {
-  //   const body = {date_release: new Date(), date_revision: new Date(), description: "Una breve descripcion 2", id: new Date().getTime().toString(), logo: "", name: "producto 2"};
-  //   this.productService.createProduct(body).subscribe((resp) => console.log(resp))
-  // }
-
 
 }

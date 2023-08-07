@@ -14,3 +14,28 @@ h1
 .alert_error
     color: red
     font-size: 1.2rem
+
+.loader
+    display: flex
+    width: 100%
+    height: calc(100vh - 10rem)
+    justify-content: center
+    align-items: center
+
+    &:after
+        content: " "
+        display: block
+        width: 64px
+        height: 64px
+        margin: 8px
+        border-radius: 50%
+        border: 6px solid #0E265A
+        border-color: #0E265A transparent #0E265A transparent
+        animation: loader-rings 1.2s linear infinite
+
+@keyframes loader-rings
+    0%
+        transform: rotate(0deg)
+
+    100%
+        transform: rotate(360deg)

@@ -1,9 +1,14 @@
 <section class='form_container'>
+    <!-- TITLE -->
     <div class='form_title'>
         <h1>{{title}}</h1>
     </div>
+    <!-- INFO ABOUT THE FORM -->
     <p class="form_required-fields">(*) Campos requeridos</p>
+
+    <!-- FORM -->
     <form class='form' [formGroup]="form" (ngSubmit)="save()">
+        <!-- ID -->
         <div class='form_field'>
             <label [ngClass]="{'disabled': editMode}" for="id">ID *</label>
             <input [ngClass]="{'disabled': editMode}" type='text' id="id" formControlName="id" minlength="3"
@@ -18,6 +23,7 @@
                 El ID ya existe
             </div>
         </div>
+        <!-- NAME -->
         <div class='form_field'>
             <label for="name">Nombre *</label>
             <input type='text' id='name' formControlName='name' minlength="5" maxlength="100" />
@@ -30,6 +36,7 @@
                 Mínimo 5 caracteres
             </div>
         </div>
+        <!-- DESCRIPTION -->
         <div class='form_field'>
             <label for="description">Descripción *</label>
             <input type='text' id="description" formControlName="description" minlength="10" maxlength="200" />
@@ -42,6 +49,7 @@
                 Mínimo 10 caracteres
             </div>
         </div>
+        <!-- LOGO -->
         <div class='form_field'>
             <label for="logo">Logo *</label>
             <input type='text' id='logo' formControlName='logo' />
@@ -50,6 +58,7 @@
                 Campo requerido
             </div>
         </div>
+        <!-- DATE RELEASE -->
         <div class='form_field'>
             <label for="date_release">Fecha de liberación *</label>
             <input type='date' id='date_release' formControlName='date_release' (change)="handleDateChange($event)"
@@ -59,15 +68,20 @@
                 Campo requerido
             </div>
         </div>
+        <!-- DATE REVISION -->
         <div class='form_field'>
             <label class='disabled' for="date_revision">Fecha de revisión *</label>
             <input class='disabled' type='date' id='date_revision' formControlName='date_revision' />
         </div>
+        <!-- SECTION ADDED TO KEEP THE GRID SHAPE -->
         <div class='form_buttons' *ngIf="editMode">
         </div>
+        <!-- RESTART BUTTON -->
+        <!-- Only shown in edition mode -->
         <div class='form_buttons' *ngIf="!editMode">
-            <button class='form_buttons-restart' type='button' (click)="reset()">Reiniciar</button>
+            <button class='form_buttons-restart' type='button' (click)="form.reset()">Reiniciar</button>
         </div>
+        <!-- SAVE BUTTON -->
         <div class='form_buttons'>
             <button class='form_buttons-send' type='submit' [disabled]="!form.valid">Enviar</button>
         </div>

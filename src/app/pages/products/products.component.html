@@ -1,11 +1,18 @@
-<section class='products'>
+<!-- LOADER -->
+<div *ngIf="loading" class="loader"></div>
+
+<!-- PRODUCTS SECTION -->
+<section *ngIf="!loading" class='products'>
     <div class='products_search-add_section'>
+        <!-- INPUT FOR SEARCH -->
         <div class='products_search'>
             <input (keyup)="setSearchValue($event)" placeholder='Buscar...' type='text' />
         </div>
+        <!-- BUTTON TO GO TO CREATE FORM -->
         <div class='products_add'>
             <button type='button' (click)="goToCreate()">Agregar</button>
         </div>
     </div>
+    <!-- LIST OF PRODUCTS -->
     <app-table [text_value]='text_value'></app-table>
 </section>

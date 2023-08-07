@@ -14,6 +14,7 @@ export class TableComponent implements OnInit {
 
   products: Product[] = [];
   filteredProducts: Product[] = [];
+  searchedProducts: Product[] = [];
   default_logo: string = "https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg";
   page: number = 1;
   productsPerPage: number = 5;
@@ -24,12 +25,14 @@ export class TableComponent implements OnInit {
     this.getProducts();
   }
 
+  // Trigger the search when text_value has changed
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['text_value']) {
       this.handleSearch();
     }
   }
 
+  // Get all Products to show in the Table
   getProducts() {
     const handleResp = this.productService.getProducts().pipe(
       map((resp) => {
@@ -49,25 +52,22 @@ export class TableComponent implements OnInit {
     });
   }
 
+  // Method to handle the search by name and description
   handleSearch() {
     if (this.text_value) {
-      this.filteredProducts = this.products.filter((el) => el.name?.toLocaleLowerCase().includes(this.text_value) || el.description?.toLocaleLowerCase().includes(this.text_value));
-    } else {
-      this.filteredProducts = this.products;
+      this.searchedProducts = this.products.filter(
+        (el) => el.name?.toLowerCase().includes(this.text_value.toLowerCase()) ||
+          el.description?.toLowerCase().includes(this.text_value.toLowerCase())
+      );
     }
+    this.getActualPage();
   }
 
+  // Handle the Delete for a Product
   handleDelete(id: string) {
     const allow_delete = confirm("¿Estás seguro de eliminar este producto?");
     if (allow_delete) {
       const handleResp = this.productService.deleteProduct(id).pipe(
-        map((resp) => {
-          if (!resp) {
-            alert("Eliminado correctamente");
-            return;
-          }
-          return resp;
-        }), retry(3),
         catchError(() => of(alert("Algo salió mal, intentalo mas tarde"))));
 
       handleResp.subscribe((data) => {
@@ -78,19 +78,27 @@ export class TableComponent implements OnInit {
     }
   }
 
+  // Pagination handler
   handleChangePage(page: number) {
     this.page = page;
     this.getActualPage();
   }
 
+  // Amount of elements handler
   handleViewQuantity(e: Event) {
     this.productsPerPage = +(e.target as HTMLInputElement).value;
     this.getActualPage();
   }
 
+  // This method allows us to know how many elements should we show
   getActualPage() {
+    console.log(this.searchedProducts)
     const start = (this.page - 1) * this.productsPerPage;
     const end = start + this.productsPerPage;
-    this.filteredProducts = this.products.slice(start, end);
+    if (this.text_value) {
+      this.filteredProducts = this.searchedProducts.slice(start, end);
+    } else {
+      this.filteredProducts = this.products.slice(start, end);
+    }
   }
 }
