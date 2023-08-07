@@ -11,6 +11,10 @@ export class ProductsService {
 
   constructor(public http: HttpClient) { }
 
+  getValue() {
+    return "Service is working";
+  }
+
   getProducts() {
     return this.http.get<Product[]>(`${this.URL_BASE}/bp/products`);
   }

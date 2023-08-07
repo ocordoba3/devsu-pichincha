@@ -49,9 +49,17 @@
                 font-weight: bold
             .form_buttons-send
                 background-color: #FFDD00
+                &:hover
+                    background-color: #d4c772
+                &:disabled
+                    opacity: .5
+                    &:hover
+                        background-color: #FFDD00
 
             .form_buttons-restart
                 background-color: #c4c4c4
+                &:hover
+                    background-color: #757474
 
         .form_buttons:has(.form_buttons-restart)
             text-align: end

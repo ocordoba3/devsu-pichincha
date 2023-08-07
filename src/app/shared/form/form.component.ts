@@ -30,7 +30,7 @@ export class FormComponent implements OnInit {
       id: [{ value: "", disabled: this.editMode }, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]], // TODO Validar ID unico
       name: ["", [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       description: ["", [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
-      logo: ["https://www.visa.com.ec/dam/VCOM/regional/lac/SPA/Default/Pay%20With%20Visa/Tarjetas/visa-signature-400x225.jpg", Validators.required],
+      logo: ["", Validators.required],
       date_release: ["", Validators.required],
       date_revision: [{ value: "", disabled: true }, Validators.required],
     });
