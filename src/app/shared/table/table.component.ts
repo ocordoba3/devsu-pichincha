@@ -92,7 +92,6 @@ export class TableComponent implements OnInit {
 
   // This method allows us to know how many elements should we show
   getActualPage() {
-    console.log(this.searchedProducts)
     const start = (this.page - 1) * this.productsPerPage;
     const end = start + this.productsPerPage;
     if (this.text_value) {
